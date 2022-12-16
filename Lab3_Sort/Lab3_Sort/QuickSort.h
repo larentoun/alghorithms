@@ -2,10 +2,9 @@
 #include <string>
 #include <algorithm>
 
-constexpr int kInsertSortSize = 128;
+constexpr int kInsertSortSize = 8;
 constexpr int kArraySize = 800;
 
-//v3
 template<typename T, typename Compare>
 void combinedSort(T* first, T* last, Compare comp) {
 	if (first > last) {
@@ -30,7 +29,6 @@ void combinedSort(T* first, T* last, Compare comp) {
 	}
 }
 
-//v3
 template<typename T, typename Compare>
 void quickSort(T* first, T* last, Compare comp) {
 	if (first > last) {
@@ -51,7 +49,6 @@ void quickSort(T* first, T* last, Compare comp) {
 	}
 }
 
-//v2
 template<typename T, typename Compare>
 void insertSort(T* first, T* last, Compare comp) {
 	if (first == last) {
@@ -108,13 +105,4 @@ void populateIntArray(int a[], int arraySize) {
 	for (int i = 0; i < arraySize; ++i) {
 		a[i] = arraySize - i;
 	}
-}
-
-bool checkArray(int a[], int arraySize) {
-	for (int i = 0; i < arraySize - 1; ++i) {
-		if (a[i] > a[i + 1]) {
-			return false;
-		}
-	}
-	return true;
 }

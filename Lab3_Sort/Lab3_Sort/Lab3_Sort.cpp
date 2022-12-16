@@ -1,6 +1,3 @@
-// Lab3_Sort.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <fstream>
 #include <windows.h>
@@ -124,6 +121,6 @@ int main()
 {
     //compareQuickInsertSorts();
     //compareQuickInsertCombinedSorts();
-    compareCombinedSorts();
+    //compareCombinedSorts();
     return 0;
 }
