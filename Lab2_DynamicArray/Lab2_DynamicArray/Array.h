@@ -81,58 +81,50 @@ Array<T>::~Array() {
 
 template<typename T>
 int Array<T>::insert(const T& value) {
+    return insert(size_, value);
+}
+
+template<typename T>
+int Array<T>::insert(int index, const T& value) {
+    if (index < 0) {
+        return -1;
+    }
+
+    if (index > size_) {
+        index = size_;
+    }
+
     if (size_ + 1 > capacity_) {
         capacity_ *= 2;
         T* temp = (T*)malloc(capacity_ * sizeof(T));
         for (int i = 0; i < size_; ++i) {
             new (temp + i) T(std::move(pitems_[i]));
-        }
-        for (int i = 0; i < size_; ++i) {
             pitems_[i].~T();
         }
         std::free(pitems_);
         pitems_ = temp;
     }
-    new(pitems_ + size_) T(value);
+
+    if (index != size_) {
+        for (int i = size_ - 1; i >= index; --i) {
+            new(pitems_ + i + 1) T(std::move(pitems_[i]));
+            pitems_[i].~T();
+        }
+    }
+
+    new(pitems_ + index) T(value);
     size_ += 1;
     return size_ - 1;
 }
 
 template<typename T>
-int Array<T>::insert(int index, const T& value) {
-    if (index < 0 || index > size_) {
-        return -1;
-    }
-    if (size_ + 1 > capacity_) {
-        capacity_ *= 2;
-        T* temp = (T*)malloc(capacity_ * sizeof(T));
-        for (int i = 0; i < size_; ++i) {
-            new (temp + i) T(std::move(pitems_[i]));
-        }
-        for (int i = 0; i < size_; ++i) {
-            pitems_[i].~T();
-        }
-        std::free(pitems_);
-        pitems_ = temp;
-    }
-    new(pitems_ + size_) T();
-    if (size_ > index) {
-        for (int i = size_; i > index; --i) {
-            pitems_[i] = std::move(pitems_[i - 1]);
-        }
-    }
-    new(pitems_ + index) T(value);
-    size_ += 1;
-    return index;
-}
-
-template<typename T>
 void Array<T>::remove(int index) {
-    if (size_ < 1 || index < 0 || index > size_ + 1) {
+    if (size_ < 1 || index < 0 || index >= size_) {
         return;
     }
     for (int i = index; i < size_ - 1; ++i) {
-        pitems_[i] = std::move(pitems_[i + 1]);
+        pitems_[i].~T();
+        new(pitems_ + i) T(std::move(pitems_[i + 1]));
     }
     pitems_[size_ - 1].~T();
     size_ -= 1;

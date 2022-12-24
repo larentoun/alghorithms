@@ -32,12 +32,21 @@ namespace UnitTest
 		}
 		TEST_METHOD(InsertWithIndexTest) {
 			Array<std::string> myArray;
-			for (int i = 0; i < 16; ++i) {
+			for (int i = 0; i < 4; ++i) {
 				myArray.insert(std::string("TEST") + std::to_string(myArray.size()));
 			}
-			std::string textToInsert = "NEWVALUE";
-			myArray.insert(3, textToInsert);
-			Assert::AreEqual(textToInsert, myArray[3]);
+			std::string textToInsert = "INSERT_AT_START";
+			myArray.insert(0, textToInsert);
+			Assert::AreEqual(textToInsert, myArray[0]);
+			textToInsert = "INSERT_AT_SECOND";
+			myArray.insert(1, textToInsert);
+			Assert::AreEqual(textToInsert, myArray[1]);
+			textToInsert = "INSERT_AT_SIZE";
+			myArray.insert(myArray.size(), textToInsert);
+			Assert::AreEqual(textToInsert, myArray[myArray.size() - 1]);
+			textToInsert = "INSERT_PAST_SIZE";
+			myArray.insert(myArray.size() + 10, textToInsert);
+			Assert::AreEqual(textToInsert, myArray[myArray.size() - 1]);
 		}
 		TEST_METHOD(CopyConstructorTest) {
 			Array<std::string> myArray;

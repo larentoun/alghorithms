@@ -1,5 +1,2 @@
 ﻿  Lab2_DynamicArray.cpp
-D:\VisualStudio\source\repos\Lab2_DynamicArray\Lab2_DynamicArray\Lab2_DynamicArray.cpp(24,17): error C2662: 'void Array<std::string>::ConstIterator::next(void)': cannot convert 'this' pointer from 'const Array<std::string>::ConstIterator' to 'Array<std::string>::ConstIterator &'
-D:\VisualStudio\source\repos\Lab2_DynamicArray\Lab2_DynamicArray\Lab2_DynamicArray.cpp(24,9): message : Conversion loses qualifiers
-D:\VisualStudio\source\repos\Lab2_DynamicArray\Lab2_DynamicArray\Array.h(39,14): message : see declaration of 'Array<std::string>::ConstIterator::next'
-D:\VisualStudio\source\repos\Lab2_DynamicArray\Lab2_DynamicArray\Lab2_DynamicArray.cpp(24,17): message : while trying to match the argument list '()'
+  Lab2_DynamicArray.vcxproj -> C:\Visual Studio Projects\alghorithms\Lab2_DynamicArray\x64\Debug\Lab2_DynamicArray.exe
