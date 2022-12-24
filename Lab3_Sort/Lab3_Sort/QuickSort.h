@@ -2,8 +2,8 @@
 #include <string>
 #include <algorithm>
 
-constexpr int kInsertSortSize = 8;
-constexpr int kArraySize = 800;
+constexpr int kInsertSortSize = 35;
+constexpr int kArraySize = 50;
 
 template<typename T, typename Compare>
 void combinedSort(T* first, T* last, Compare comp) {

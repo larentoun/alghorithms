@@ -12,7 +12,7 @@ void StartCounter()
     if (!QueryPerformanceFrequency(&li))
         std::cout << "QueryPerformanceFrequency failed!\n";
 
-    PCFreq = double(li.QuadPart) / 1000.0;
+    PCFreq = double(li.QuadPart) / 1000000; //миллисекунд
 
     QueryPerformanceCounter(&li);
     CounterStart = li.QuadPart;
@@ -87,18 +87,18 @@ void compareQuickInsertCombinedSorts() {
     double quickSortTime = 0.0;
     double insertSortTime = 0.0;
     double combinedSortTime = 0.0;
-    const int testAmount = 100;
+    const int testAmount = 1000;
     std::ofstream outputFile;
     outputFile.open("compareCombinedTests.csv");
     outputFile << "arraySize,quickSort,insertSort,combinedSort" << kInsertSortSize << std::endl;
 
-    for (int i = 1; i < kArraySize / 8; ++i) {
+    for (int i = 1; i < kArraySize; ++i) {
         for (int j = 0; j < testAmount; ++j) {
-            quickSortTime += counterTest('q', i * 8);
-            insertSortTime += counterTest('i', i * 8);
-            combinedSortTime += counterTest('c', i * 8);
+            quickSortTime += counterTest('q', i);
+            insertSortTime += counterTest('i', i);
+            combinedSortTime += counterTest('c', i);
         }
-        outputFile << i * 8 << "," << quickSortTime / testAmount << "," << insertSortTime / testAmount << "," << combinedSortTime / testAmount << std::endl;
+        outputFile << i << "," << quickSortTime / testAmount << "," << insertSortTime / testAmount << "," << combinedSortTime / testAmount << std::endl;
     }
 }
 
@@ -120,7 +120,7 @@ void compareCombinedSorts() {
 int main()
 {
     //compareQuickInsertSorts();
-    //compareQuickInsertCombinedSorts();
+    compareQuickInsertCombinedSorts();
     //compareCombinedSorts();
     return 0;
 }
