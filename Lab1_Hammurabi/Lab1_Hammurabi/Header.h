@@ -2,6 +2,7 @@
 #include "Helpers.h"
 #include <stdbool.h>
 #include <iostream>
+#include <string>
 
 typedef double wheat;
 typedef int acre;
@@ -10,9 +11,9 @@ typedef bool plague;
 typedef int year;
 
 struct City {
-    people peopleAmount;
-    acre acreAmount;
-    wheat wheatAmount;
+    people peopleAmount = 100;
+    acre acreAmount = 2800;
+    wheat wheatAmount = 1000;
 };
 
 struct TurnInfo {
@@ -21,7 +22,6 @@ struct TurnInfo {
     people peopleArrived = 0;
     plague plagueHappened = false;
     wheat wheatCollected = 0;
-    wheat wheatPerAcre = 0;
     wheat wheatDestroyed = 0;
     wheat acreCost = 0;
 };
@@ -42,6 +42,7 @@ struct RuleBook {
 };
 
 City generateNewCity();
-TurnInfo generateNewTurn(City& city, TurnInfo& lastTurn, PlayerTurnInput& playerTurnInput);
-void showTurnInfo(TurnInfo& turnInfo, City& city);
-PlayerTurnInput playerInput(TurnInfo& turnInfo, City& city);
+TurnInfo generateNewTurn(City& city, TurnInfo& lastRound, PlayerTurnInput& playerTurnInput, RuleBook& ruleBook);
+void showTurnInfo(TurnInfo& turnInfo, City& city, RuleBook& ruleBook);
+PlayerTurnInput playerInput(City& city, RuleBook& ruleBook);
+int getIntInput();

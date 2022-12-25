@@ -11,7 +11,7 @@
 Каждый раунд - один год правления
 Каждый гражданин возделывает некоторое количество акр земли
 Акры земли производят некоторое количество бушелей пшеницы
-Пшеница испольбзуется либо для еды, либо для семян в следующий год
+Пшеница используется либо для еды, либо для семян в следующий год
 Акры земли могут быть куплены и проданы за пшеницу
 
         Процесс игры
@@ -45,14 +45,16 @@ int main()
     City city = generateNewCity();
     TurnInfo turnInfo;
     TurnInfo allTurns[MAX_ROUNDS];
+    RuleBook ruleBook;
     turnInfo.year = 0;
     PlayerTurnInput playerTurnInput;
+    
+    playerTurnInput = playerInput(city, ruleBook);
     while (turnInfo.year < MAX_ROUNDS) {
-        turnInfo.year += 1;
-        turnInfo = generateNewTurn(city, turnInfo, playerTurnInput);
+        turnInfo = generateNewTurn(city, turnInfo, playerTurnInput, ruleBook);
         allTurns[turnInfo.year] = turnInfo;
-        turnInfo.year += 1;
-        playerTurnInput = playerInput(turnInfo, city);
+        showTurnInfo(turnInfo, city, ruleBook);
+        playerTurnInput = playerInput(city, ruleBook);
     }
     return EXIT_SUCCESS;
 }
