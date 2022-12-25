@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <utility>
+#include <string>
 constexpr int kDefaultCapacity = 8;
 
 template<typename T>
@@ -87,7 +88,7 @@ int Array<T>::insert(const T& value) {
 template<typename T>
 int Array<T>::insert(int index, const T& value) {
     if (index < 0) {
-        return -1;
+        index = 0;
     }
 
     if (index > size_) {

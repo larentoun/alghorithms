@@ -38,12 +38,19 @@ namespace UnitTest
 			std::string textToInsert = "INSERT_AT_START";
 			myArray.insert(0, textToInsert);
 			Assert::AreEqual(textToInsert, myArray[0]);
+
 			textToInsert = "INSERT_AT_SECOND";
 			myArray.insert(1, textToInsert);
 			Assert::AreEqual(textToInsert, myArray[1]);
+
+			textToInsert = "INSERT_AT_LAST_INDEX";
+			myArray.insert(myArray.size() - 1, textToInsert);
+			Assert::AreEqual(textToInsert, myArray[myArray.size() - 2]);
+
 			textToInsert = "INSERT_AT_SIZE";
 			myArray.insert(myArray.size(), textToInsert);
 			Assert::AreEqual(textToInsert, myArray[myArray.size() - 1]);
+
 			textToInsert = "INSERT_PAST_SIZE";
 			myArray.insert(myArray.size() + 10, textToInsert);
 			Assert::AreEqual(textToInsert, myArray[myArray.size() - 1]);
