@@ -1,4 +1,4 @@
-Lab1 - in progress (not completed)
+Lab1 - ready for review
 
 Lab2 - ready for review (fixed)
 
