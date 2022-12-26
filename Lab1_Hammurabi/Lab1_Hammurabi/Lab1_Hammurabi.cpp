@@ -38,25 +38,55 @@
 Игра заканчивается через 10 раундов, когда город вымрет, или если более 45% населения умрут от голода в течении одного раунда.
 */
 
-#define MAX_ROUNDS 10
+int main() {
+    setlocale(LC_ALL, "");
 
-int main()
-{
-    City city = generateNewCity();
+    City city;
     TurnInfo turnInfo;
-    TurnInfo allTurns[MAX_ROUNDS];
     RuleBook ruleBook;
-    turnInfo.year = 0;
     PlayerTurnInput playerTurnInput;
-    
-    playerTurnInput = playerInput(city, ruleBook);
-    while (turnInfo.year < MAX_ROUNDS) {
-        turnInfo = generateNewTurn(city, turnInfo, playerTurnInput, ruleBook);
-        allTurns[turnInfo.year] = turnInfo;
-        showTurnInfo(turnInfo, city, ruleBook);
-        playerTurnInput = playerInput(city, ruleBook);
+    bool loadedFile = false;
+    std::ifstream saveFile;
+    saveFile.open("saveFile.dat");
+    while (true) {
+        if (saveFile) {
+            saveFile.close();
+            std::cout << "Была найдена игра, продолжить? 1/0" << std::endl;
+            int input;
+            while (true)
+            {
+                input = getIntInput();
+                if (input == 1) {
+                    loadGame(city, turnInfo, ruleBook);
+                    loadedFile = true;
+                    break;
+                }
+                if (input == 0) {
+                    startNewGame(city, turnInfo, playerTurnInput, ruleBook);
+                    std::remove("saveFile.dat");
+                    break;
+                }
+            }
+        }
+        else {
+            startNewGame(city, turnInfo, playerTurnInput, ruleBook);
+        }
+        if (loadedFile) {
+            showTurnInfo(turnInfo, city, ruleBook);
+            playerTurnInput = playerInput(city, ruleBook);
+            manageAcreChanges(ruleBook, city, playerTurnInput);
+        }
+        while (turnInfo.year < kMaxRounds) {
+            randomizeValuesForRound(ruleBook);
+            generateNewTurn(city, turnInfo, playerTurnInput, ruleBook);
+            saveGame(city, turnInfo, ruleBook);
+            showTurnInfo(turnInfo, city, ruleBook);
+            shouldContinue();
+            playerTurnInput = playerInput(city, ruleBook);
+            manageAcreChanges(ruleBook, city, playerTurnInput);
+        }
+        finishGame(city);
     }
+    
     return EXIT_SUCCESS;
 }
-
-#undef MAX_ROUNDS
