@@ -32,8 +32,6 @@ int DiceGenerator::dice(std::string input) {
 }
 
 int DiceGenerator::getTotal() {
-	std::cout << "Result: " << outputString_ << std::endl;
-	std::cout << "Total: " << totalValue_ << std::endl;
 	int final = totalValue_;
 	totalValue_ = 0;
 	outputString_ = "";
