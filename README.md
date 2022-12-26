@@ -4,4 +4,4 @@ Lab2 - ready for review (fixed)
 
 Lab3 - ready for review (updated graphs)
 
-Lab4 - in progress (program completed, need graphs)
+Lab4 - ready for review
